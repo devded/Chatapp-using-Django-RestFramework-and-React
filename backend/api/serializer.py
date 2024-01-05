@@ -73,10 +73,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         super(ProfileSerializer, self).__init__(*args, **kwargs)
         request = self.context.get('request')
-        if request and request.method=='POST':
-            self.Meta.depth = 0
-        else:
-            self.Meta.depth = 3
+        self.Meta.depth = 0 if request and request.method=='POST' else 3
 
 
 class MessageSerializer(serializers.ModelSerializer):
@@ -90,10 +87,7 @@ class MessageSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         super(MessageSerializer, self).__init__(*args, **kwargs)
         request = self.context.get('request')
-        if request and request.method=='POST':
-            self.Meta.depth = 0
-        else:
-            self.Meta.depth = 2
+        self.Meta.depth = 0 if request and request.method=='POST' else 2
 
 
 

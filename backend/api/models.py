@@ -24,7 +24,7 @@ class Profile(models.Model):
     verified = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
-        if self.full_name == "" or self.full_name == None:
+        if self.full_name == "" or self.full_name is None:
             self.full_name = self.user.username
         super(Profile, self).save(*args, **kwargs)
 
@@ -72,9 +72,7 @@ class ChatMessage(models.Model):
 
     @property
     def sender_profile(self):
-        sender_profile = Profile.objects.get(user=self.sender)
-        return sender_profile
+        return Profile.objects.get(user=self.sender)
     @property
     def reciever_profile(self):
-        reciever_profile = Profile.objects.get(user=self.reciever)
-        return reciever_profile
+        return Profile.objects.get(user=self.reciever)
